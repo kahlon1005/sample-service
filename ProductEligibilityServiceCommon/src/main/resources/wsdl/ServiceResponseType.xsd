@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ldb="http://type.common.services.bcldb.com" targetNamespace="http://type.common.services.bcldb.com" elementFormDefault="qualified">
+	<xsd:simpleType name="severityType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="WARN"/>
+			<xsd:enumeration value="MINOR"/>
+			<xsd:enumeration value="MAJOR"/>
+			<xsd:enumeration value="CRITICAL"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="serviceErrorType">
+		<xsd:sequence>
+			<xsd:element name="origin" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="errorCode" type="xsd:int"/>
+			<xsd:element name="errorMessage" type="xsd:string"/>
+			<xsd:element name="timestamp" type="xsd:dateTime"/>
+			<xsd:element name="severity" type="ldb:severityType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="postServiceResponseType">
+		<xsd:sequence>
+			<xsd:element name="success" type="xsd:boolean"/>
+			<xsd:element name="serviceError" type="ldb:serviceErrorType" minOccurs="0"/>
+			<xsd:element name="auxMessage" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="servicePostResponse" type="ldb:postServiceResponseType"/>
+	<xsd:element name="ServiceError" type="ldb:serviceErrorType"/>
+</xsd:schema>

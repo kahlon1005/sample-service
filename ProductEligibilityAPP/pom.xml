@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.bcldb.services</groupId>
+    <artifactId>ProductEligibility</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>ProductEligibilityAPP</artifactId>
+  <packaging>ear</packaging>
+  <name>BC LDB - Product Eligibility Application</name>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>com.bcldb.services</groupId>
+  		<artifactId>ProductEligibilityService</artifactId>
+  		<version>1.0</version>
+  		<type>war</type>
+  	</dependency>
+
+	<dependency>
+		<groupId>com.bcldb.services</groupId>
+		<artifactId>ProductEligibilityServiceCommon</artifactId>
+		<version>1.0</version>			
+	</dependency>
+	
+  </dependencies>
+  
+  <build>
+	<plugins>
+		<plugin>
+			<artifactId>maven-ear-plugin</artifactId>
+			<version>2.10.1</version>
+			<configuration>
+				<!-- <earSourceDirectory>EarContent</earSourceDirectory> <generateApplicationXml>true</generateApplicationXml> 
+					<version>6</version> -->
+				<defaultLibBundleDir>lib</defaultLibBundleDir>
+				<skinnyWars>true</skinnyWars>
+			</configuration>
+		</plugin>
+	</plugins>
+  </build>
+	
+</project>

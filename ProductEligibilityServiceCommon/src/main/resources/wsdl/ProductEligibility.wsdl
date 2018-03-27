@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 rel. 3 (x64) (http://www.altova.com) by Zsolt Molnar (LIQUOR DISTRIBUTION BRANCH) -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:ProductEligibilityService" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tcsbc="http://type.common.services.bcldb.com" xmlns:ldbcom="http://common.services.bcldb.com" xmlns:eligibilityldb="http://eligibilityservice.services.bcldb.com" xmlns:ns="http://common.services.bcldb.com" targetNamespace="urn:ProductEligibilityService">
+	<types>
+		<xsd:schema targetNamespace="urn:ProductEligibilityService/types" elementFormDefault="qualified"/>
+		<xsd:schema>
+			<xsd:import schemaLocation="ProductEligibilityServiceTypes.xsd" namespace="http://eligibilityservice.services.bcldb.com"/>
+			<xsd:import schemaLocation="ServiceResponseType.xsd" namespace="http://type.common.services.bcldb.com"/>
+			<xsd:import schemaLocation="CommonLDBTypes.xsd" namespace="http://common.services.bcldb.com"/>
+		</xsd:schema>
+	</types>
+	<message name="ErrorMessage">
+		<part name="part" element="tcsbc:ServiceError"/>
+	</message>
+	<message name="getVersionInfoReqMsg">
+		<part name="part" element="ldbcom:GetVersionInfoRequest"/>
+	</message>
+	<message name="getVersionInfoRespMsg">
+		<part name="return" element="ldbcom:GetVersionResponse"/>
+	</message>
+	<message name="getEligibilityBySKUReqMsg">
+		<part name="part" element="eligibilityldb:GetEligibilityBySKURequest"/>
+	</message>
+	<message name="getEligibilityBySKURespMsg">
+		<part name="return" element="eligibilityldb:GetEligibilityBySKUResponse"/>
+	</message>
+	<message name="getEligibilityByCustomerReqMsg">
+		<part name="part" element="eligibilityldb:GetEligibilityByCustomerRequest"/>
+	</message>
+	<message name="getEligibilityByCustomerRespMsg">
+		<part name="return" element="eligibilityldb:GetEligibilityByCustomerResponse"/>
+	</message>
+	<message name="getEligibilityByEffectiveDateReqMsg">
+		<part name="part" element="eligibilityldb:GetEligibilityByEffectiveDateRequest"/>
+	</message>
+	<message name="getEligibilityByEffectiveDateRespMsg">
+		<part name="return" element="eligibilityldb:GetEligibilityByEffectiveDateResponse"/>
+	</message>
+	<portType name="ProductEligibilityService">
+		<operation name="getVersionInfo">
+			<input message="tns:getVersionInfoReqMsg"/>
+			<output message="tns:getVersionInfoRespMsg"/>
+			<fault name="error" message="tns:ErrorMessage"/>
+		</operation>
+		<operation name="getEligibilityBySKU">
+			<input message="tns:getEligibilityBySKUReqMsg"/>
+			<output message="tns:getEligibilityBySKURespMsg"/>
+			<fault name="error" message="tns:ErrorMessage"/>
+		</operation>
+		<operation name="getEligibilityByCustomer">
+			<input message="tns:getEligibilityByCustomerReqMsg"/>
+			<output message="tns:getEligibilityByCustomerRespMsg"/>
+			<fault name="error" message="tns:ErrorMessage"/>
+		</operation>
+		<operation name="getEligibilityByEffectiveDate">
+			<input message="tns:getEligibilityByEffectiveDateReqMsg"/>
+			<output message="tns:getEligibilityByEffectiveDateRespMsg"/>
+			<fault name="error" message="tns:ErrorMessage"/>
+		</operation>
+	</portType>
+	<binding name="ProductEligibilityServiceImplSOAP11Binding" type="tns:ProductEligibilityService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="getVersionInfo">
+			<soap:operation soapAction="urn:ProductEligibilityService/getVersionInfo" style="document"/>
+			<input>
+				<soap:body parts="part" use="literal"/>
+			</input>
+			<output>
+				<soap:body parts="return" use="literal"/>
+			</output>
+			<fault name="error">
+				<soap:fault name="error" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getEligibilityBySKU">
+			<soap:operation soapAction="urn:ProductEligibilityService/getEligibilityBySKU" style="document"/>
+			<input>
+				<soap:body parts="part" use="literal"/>
+			</input>
+			<output>
+				<soap:body parts="return" use="literal"/>
+			</output>
+			<fault name="error">
+				<soap:fault name="error" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getEligibilityByCustomer">
+			<soap:operation soapAction="urn:ProductEligibilityService/getEligibilityByCustomer" style="document"/>
+			<input>
+				<soap:body parts="part" use="literal"/>
+			</input>
+			<output>
+				<soap:body parts="return" use="literal"/>
+			</output>
+			<fault name="error">
+				<soap:fault name="error" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getEligibilityByEffectiveDate">
+			<soap:operation soapAction="urn:ProductEligibilityService/getEligibilityByEffectiveDate" style="document"/>
+			<input>
+				<soap:body parts="part" use="literal"/>
+			</input>
+			<output>
+				<soap:body parts="return" use="literal"/>
+			</output>
+			<fault name="error">
+				<soap:fault name="error" use="literal"/>
+			</fault>
+		</operation>
+
+	</binding>
+	<service name="ProductEligibilityServiceImpl">
+		<port name="ProductEligibilityServiceImplPort" binding="tns:ProductEligibilityServiceImplSOAP11Binding">
+			<soap:address location="http://service.bcldb.com"/>
+		</port>
+	</service>
+</definitions>

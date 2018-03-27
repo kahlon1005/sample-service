@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 rel. 3 (x64) (http://www.altova.com) by Zsolt Molnar (LIQUOR DISTRIBUTION BRANCH) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eligibilityldb="http://eligibilityservice.services.bcldb.com" xmlns:ldbcom="http://common.services.bcldb.com" targetNamespace="http://eligibilityservice.services.bcldb.com" elementFormDefault="qualified">
+	<xsd:import namespace="http://common.services.bcldb.com" schemaLocation="CommonLDBTypes.xsd"/>
+	<xsd:complexType name="CustomerEligibilityDetailType">
+		<xsd:sequence>
+			<xsd:element name="CustomerType" type="xsd:string" minOccurs="1"/>
+			<xsd:element name="EffectiveDate" type="xsd:dateTime" minOccurs="1"/>
+			<xsd:element name="SellingUnitOrder" type="ldbcom:yesNoEnumType" minOccurs="1"/>
+			<xsd:element name="CaseOrder" type="ldbcom:yesNoEnumType" minOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SKUEligibilityDetailType">
+		<xsd:sequence>
+			<xsd:element name="SKU" type="xsd:string" minOccurs="1"/>
+			<xsd:element name="EffectiveDate" type="xsd:dateTime" minOccurs="1"/>
+			<xsd:element name="SellingUnitOrder" type="ldbcom:yesNoEnumType" minOccurs="1"/>
+			<xsd:element name="CaseOrder" type="ldbcom:yesNoEnumType" minOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SKUEligibilityType">
+		<xsd:sequence>
+			<xsd:element name="SKU" type="xsd:string" minOccurs="1"/>
+			<xsd:element name="Eligibility" type="eligibilityldb:CustomerEligibilityDetailType" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CustomerEligibilityType">
+		<xsd:sequence>
+			<xsd:element name="CustomerType" type="xsd:string" minOccurs="1"/>
+			<xsd:element name="Eligibility" type="eligibilityldb:SKUEligibilityDetailType" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="GetEligibilityBySKURequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="SKU" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+				<xsd:element name="EffectiveDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GetEligibilityBySKUResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="SKUEligibilities" type="eligibilityldb:SKUEligibilityType" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GetEligibilityByCustomerRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="CustomerType" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+				<xsd:element name="EffectiveDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GetEligibilityByCustomerResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="CustomerEligibilities" type="eligibilityldb:CustomerEligibilityType" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GetEligibilityByEffectiveDateRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="EffectiveDate" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GetEligibilityByEffectiveDateResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="CustomerEligibilities" type="eligibilityldb:CustomerEligibilityType" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

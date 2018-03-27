@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.bcldb.services</groupId>
+    <artifactId>ProductEligibility</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>ProductEligibilityServiceCommon</artifactId>
+  <name>BC LDB - Product Eligibility Service Common</name>
+  
+  <profiles>
+    <profile>
+		<id>default</id>
+		<activation>
+			<activeByDefault>true</activeByDefault>
+		</activation>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+
+			</plugins>
+		</build>
+    </profile>
+
+	<!-- Run with: mvn clean install -Pwsimport -->
+	<profile>
+		<id>wsimport</id>
+		<build>
+			<plugins>
+				<!-- JAX-WS plug in to generate JAXB classes -->
+				<plugin>
+					<groupId>org.jvnet.jax-ws-commons</groupId>
+					<artifactId>jaxws-maven-plugin</artifactId>
+					<version>2.1</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>wsimport</goal>
+							</goals>
+							<configuration>
+								<vmArgs>
+									<vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+								</vmArgs>
+								<genJWS>true</genJWS>
+								<wsdlFiles>
+									<wsdlFile>${basedir}/src/main/resources/wsdl/ProductEligibility.wsdl</wsdlFile>
+								</wsdlFiles>
+								<sourceDestDir>${basedir}/src/main/java</sourceDestDir>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+	<!-- Run with: mvn clean install -Pjdaxsdgen -->
+	<profile>
+		<id>jdaxsdgen</id>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.jvnet.jaxb2.maven2</groupId>
+					<artifactId>maven-jaxb2-plugin</artifactId>
+					<version>0.1.0</version>
+					<executions>
+						<execution>
+							<id>ProductEligibilityServiceTypes_Schema</id>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+							<configuration>
+								<generatePackage>com.bcldb.jaxb</generatePackage>
+								<schemaDirectory>src/main/resources/wsdl</schemaDirectory>
+								<schemaIncludes>
+									<include>ProductEligibilityServiceTypes.xsd</include>
+								</schemaIncludes>
+								<generateDirectory>src/main/java</generateDirectory>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+  </profiles>
+	
+</project>
